@@ -1,0 +1,9 @@
+import { ApiModelProperty } from "@nestjs/swagger";
+import { IsString, IsOptional } from "class-validator";
+
+export class Create{{pname}}DTO {
+    @ApiModelProperty()
+    @IsString()
+    @IsOptional()
+    id: string;
+}

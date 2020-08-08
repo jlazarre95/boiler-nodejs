@@ -1,0 +1,43 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { {{pname}}Repository } from './{{name}}.repository';
+import { Create{{pname}}DTO } from 'src/{{name}}/dtos/create-{{name}}.dto';
+import { I{{pname}} } from 'src/{{name}}/interfaces/{{name}}.interface';
+import { Update{{pname}}DTO } from 'src/{{name}}/dtos/update-{{name}}.dto';
+
+@Injectable()
+export class {{pname}}Service {
+
+    constructor(private {{cname}}Repository: {{pname}}Repository) { }
+
+    create{{pname}}(dto: Create{{pname}}DTO): Promise<I{{pname}}> {
+        const {{cname}}: I{{pname}} = {
+            _id: dto.id,
+        };
+        return this.{{cname}}Repository.save({{cname}});
+    }
+
+    getAll{{pluralPascalCaseName}}(query: any): Promise<I{{pname}}[]> {
+        return this.{{cname}}Repository.find(query);
+    }
+
+    async get{{pname}}(id: string): Promise<I{{pname}}> {
+        const {{cname}}: I{{pname}} = await this.{{cname}}Repository.findById(id);
+        if(!{{cname}})
+            throw new NotFoundException();
+        return {{cname}};
+    }
+
+    async update{{pname}}(id: string, dto: Update{{pname}}DTO): Promise<void> {
+        const {{cname}}: I{{pname}} = {
+            _id: id,
+        };
+        const res: I{{pname}} = await this.{{cname}}Repository.update(id, {{cname}});
+        if(!res) 
+            throw new NotFoundException();
+    }
+
+    async delete{{pname}}(id: string): Promise<void> {
+        await this.{{cname}}Repository.delete(id);
+    }
+    
+}

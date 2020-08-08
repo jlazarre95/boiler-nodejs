@@ -1,0 +1,35 @@
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { I{{pname}}Document } from "src/{{name}}/schemas/{{name}}.schema";
+import { I{{pname}} } from "src/{{name}}/interfaces/{{name}}.interface";
+
+@Injectable()
+export class {{pname}}Repository {
+
+    constructor(@InjectModel("{{pname}}") private readonly {{cname}}Model: Model<I{{pname}}Document>) {
+        
+    }
+
+    save(map: I{{pname}}): Promise<I{{pname}}> {
+        const instance = new this.{{cname}}Model(map);
+        return instance.save();
+    }
+
+    async findById(id: string): Promise<I{{pname}}> {
+        return this.{{cname}}Model.findOne({ _id: id }).exec();
+    }
+
+    find(query: any): Promise<I{{pname}}[]> {
+        return this.{{cname}}Model.find(query).exec();
+    }
+
+    update(id: string, {{cname}}: I{{pname}}): Promise<I{{pname}}> {
+        return this.{{cname}}Model.updateOne({ _id: id }, {{cname}}).exec();
+    }
+
+    async delete(id: string): Promise<void> {
+        await this.{{cname}}Model.deleteOne({ _id: id }).exec();
+    }
+
+}

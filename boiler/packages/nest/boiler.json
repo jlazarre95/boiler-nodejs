@@ -1,0 +1,153 @@
+{
+  "params": [
+     "name"
+  ],
+   "templates": [
+     {
+        "name": "project",
+        "include": [
+           "env",
+           "docker",
+           {
+              "name": "app.module.ts.boiler",
+              "outDir": "src"
+           }
+        ]
+     },
+     {
+        "name": "env",
+        "include": ".env.boiler"
+     },
+     {
+        "name": "docker",
+        "include": [
+           "Dockerfile.boiler"
+        ]
+     },
+     {
+        "name": "create-dto",
+        "include": "create-cat.dto.ts.boiler"
+     },
+     {
+        "name": "update-dto",
+        "include": "update-cat.dto.ts.boiler"
+     },
+     {
+        "name": "class",
+        "include": "cat.ts.boiler"
+     },
+     {
+        "name": "interface",
+        "include": "cat.interface.ts.boiler"
+     },
+     {
+        "name": "schema",
+        "include": "cat.schema.ts.boiler"
+     },
+     {
+        "name": "repository",
+        "include": [
+           "cat.repository.ts.boiler",
+           "repository-test"
+        ]
+     },
+     {
+        "name": "service",
+        "include": [
+           "cat.service.ts.boiler",
+           "service-test"
+        ]
+     },
+     {
+        "name": "controller",
+        "include": [
+           "cat.controller.ts.boiler",
+           "controller-test"
+        ]
+     },
+     {
+        "name": "module",
+        "include": "cat.module.ts.boiler"
+     },
+     {
+        "name": "repository-test",
+        "include": "cat.repository.spec.ts.boiler"
+     },
+     {
+        "name": "service-test",
+        "include": "cat.service.spec.ts.boiler"
+     },
+     {
+        "name": "controller-test",
+        "include": "cat.controller.spec.ts.boiler"
+     },
+     {
+        "name": "api",
+        "outDir": "src/{{name}}",
+        "include": [
+           {
+              "name": "create-dto",
+              "outDir": "dtos"
+           },
+           {
+              "name": "update-dto",
+              "outDir": "dtos"
+           },
+           {
+              "name": "interface",
+              "outDir": "interfaces"
+           },
+           {
+              "name": "schema",
+              "outDir": "schemas"
+           },
+           {
+              "name": "repository"
+           },
+           {
+              "name": "service"
+           },
+           {
+              "name": "controller"
+           },
+           {
+              "name": "module"
+           }
+        ]
+     }
+  ],
+  "output": {
+     "file": {
+        "replace": [
+           {
+              "target": "{{controller-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{interface-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{module-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{repository-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{schema-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{service-name}}",
+              "with": "{{name}}"
+           },
+           {
+              "target": "{{dto-name}}",
+              "with": "{{name}}"
+           }
+        ]
+     }
+  }
+}
