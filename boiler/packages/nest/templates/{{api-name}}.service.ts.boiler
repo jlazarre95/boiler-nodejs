@@ -1,0 +1,43 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { {{pascalcase-class-name}}Repository } from 'src/{{class-name}}/repositories/{{class-name}}.repository';
+import { Create{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/create-{{class-name}}.dto';
+import { I{{pascalcase-class-name}} } from 'src/{{class-name}}/{{class-name}}';
+import { Update{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/update-{{class-name}}.dto';
+
+@Injectable()
+export class {{pascalcase-class-name}}Service {
+
+    constructor(private {{camelcase-class-name}}Repository: {{pascalcase-class-name}}Repository) { }
+
+    create{{pascalcase-class-name}}(dto: Create{{pascalcase-class-name}}DTO): Promise<I{{pascalcase-class-name}}> {
+        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = {
+            _id: dto.id,
+        };
+        return this.{{camelcase-class-name}}Repository.save({{camelcase-class-name}});
+    }
+
+    getAll{{plural-pascalcase-class-name}}(query: any): Promise<I{{pascalcase-class-name}}[]> {
+        return this.{{camelcase-class-name}}Repository.find(query);
+    }
+
+    async get{{pascalcase-class-name}}(id: string): Promise<I{{pascalcase-class-name}}> {
+        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = await this.{{camelcase-class-name}}Repository.findById(id);
+        if(!{{camelcase-class-name}})
+            throw new NotFoundException();
+        return {{camelcase-class-name}};
+    }
+
+    async update{{pascalcase-class-name}}(id: string, dto: Update{{pascalcase-class-name}}DTO): Promise<void> {
+        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = {
+            _id: id,
+        };
+        const res: I{{pascalcase-class-name}} = await this.{{camelcase-class-name}}Repository.update(id, {{camelcase-class-name}});
+        if(!res) 
+            throw new NotFoundException();
+    }
+
+    async delete{{pascalcase-class-name}}(id: string): Promise<void> {
+        await this.{{camelcase-class-name}}Repository.delete(id);
+    }
+    
+}

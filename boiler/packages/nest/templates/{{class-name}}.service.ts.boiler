@@ -1,0 +1,28 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+
+@Injectable()
+export class {{pascalcase-class-name}}Service {
+
+    constructor() { }
+
+    async create{{pascalcase-class-name}}(/* Declare object here */) {
+        /* Return created object here */
+    }
+
+    async getAll{{plural-pascalcase-class-name}}(query: any) {
+        /* Return array of objects here */
+    }
+
+    async get{{pascalcase-class-name}}(id: string) {
+        /* Return object here */
+    }
+
+    async update{{pascalcase-class-name}}(id: string, /* Declare object here */) {
+
+    }
+
+    async delete{{pascalcase-class-name}}(id: string) {
+   
+    }
+    
+}

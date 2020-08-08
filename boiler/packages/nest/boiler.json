@@ -1,13 +1,46 @@
 {
   "params": [
-     "name"
+    {
+      "name": "name",
+      "displayName": "Project name",
+      "description": "Name of the Nest project",
+      "type": "positional"
+    },
+    {
+      "name": "class-name",
+      "displayName": "Class name",
+      "description": "Name of the class",
+      "type": "positional"
+    },
+    {
+      "name": "plural-class-name",
+      "displayName": "Pural class name",
+      "description": "Plural form of the class name",
+      "type": "virtual",
+      "script": "return boiler.string.toPlural(boiler.params['class-name'])"
+    },
+    {
+      "name": "camelcase-class-name",
+      "type": "virtual",
+      "script": "return boiler.string.toCamelCase(boiler.params['class-name'])"
+    },
+    {
+      "name": "pascalcase-class-name",
+      "type": "virtual",
+      "script": "return boiler.string.toPascalCase(boiler.params['class-name'])"
+    }
   ],
    "templates": [
      {
         "name": "project",
+        "outDir": "{{name}}",
+        "require": [
+          "name"
+        ],
         "include": [
            "env",
            "docker",
+           "readme",
            {
               "name": "app.module.ts.boiler",
               "outDir": "src"
@@ -16,7 +49,9 @@
      },
      {
         "name": "env",
-        "include": ".env.boiler"
+        "include": [ 
+          ".env.boiler"
+        ]
      },
      {
         "name": "docker",
@@ -26,126 +61,250 @@
      },
      {
         "name": "create-dto",
-        "include": "create-cat.dto.ts.boiler"
+        "require": [
+         "class-name",
+         "plural-class-name",
+         "camelcase-class-name",
+         "pascalcase-class-name"
+        ],
+        "include": [
+          "create-{{class-name}}.dto.ts.boiler"
+        ]
      },
      {
         "name": "update-dto",
-        "include": "update-cat.dto.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "update-{{class-name}}.dto.ts.boiler"
+        ]
      },
      {
         "name": "class",
-        "include": "cat.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.ts.boiler"
+        ]
      },
      {
         "name": "interface",
-        "include": "cat.interface.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.interface.ts.boiler"
+        ]
      },
      {
         "name": "schema",
-        "include": "cat.schema.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.schema.ts.boiler"
+        ]
      },
      {
         "name": "repository",
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
         "include": [
-           "cat.repository.ts.boiler",
+           "{{class-name}}.repository.ts.boiler",
            "repository-test"
         ]
      },
      {
         "name": "service",
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
         "include": [
-           "cat.service.ts.boiler",
+           "{{class-name}}.service.ts.boiler",
            "service-test"
         ]
      },
      {
         "name": "controller",
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
         "include": [
-           "cat.controller.ts.boiler",
+           "{{class-name}}.controller.ts.boiler",
            "controller-test"
         ]
      },
      {
         "name": "module",
-        "include": "cat.module.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.module.ts.boiler"
+        ]
      },
      {
         "name": "repository-test",
-        "include": "cat.repository.spec.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.repository.spec.ts.boiler"
+        ]
      },
      {
         "name": "service-test",
-        "include": "cat.service.spec.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.service.spec.ts.boiler"
+        ]
      },
      {
         "name": "controller-test",
-        "include": "cat.controller.spec.ts.boiler"
+        "require": [
+            "class-name",
+            "plural-class-name",
+            "camelcase-class-name",
+            "pascalcase-class-name"
+        ],
+        "include": [
+          "{{class-name}}.controller.spec.ts.boiler"
+        ]
      },
      {
         "name": "api",
-        "outDir": "src/{{name}}",
+        "require": [
+            {
+               "name": "api-name",
+               "displayName": "API name",
+               "description": "Name of the API",
+               "type": "positional"
+            },
+            {
+               "name": "class-name",
+               "displayName": "Class name",
+               "description": "Name of the class",
+               "type": "virtual",
+               "script": "return boiler.params['api-name']"
+             },
+             {
+               "name": "plural-class-name",
+               "displayName": "Pural class name",
+               "description": "Plural form of the class name",
+               "type": "virtual",
+               "script": "return boiler.string.toPlural(boiler.params['class-name'])"
+             },
+             {
+               "name": "camelcase-class-name",
+               "type": "virtual",
+               "script": "return boiler.string.toCamelCase(boiler.params['class-name'])"
+             },
+             {
+               "name": "pascalcase-class-name",
+               "type": "virtual",
+               "script": "return boiler.string.toPascalCase(boiler.params['class-name'])"
+             },
+             {
+               "name": "plural-pascalcase-class-name",
+               "type": "virtual",
+               "script": "return boiler.string.toPlural(boiler.params['pascalcase-class-name'])"
+             }
+        ],
+        "outDir": "src/{{api-name}}",
         "include": [
            {
-              "name": "create-dto",
+              "name": "create-{{api-name}}.dto.ts.boiler",
               "outDir": "dtos"
            },
            {
-              "name": "update-dto",
+              "name": "update-{{api-name}}.dto.ts.boiler",
               "outDir": "dtos"
            },
            {
-              "name": "interface",
-              "outDir": "interfaces"
+              "name": "{{api-name}}.ts.boiler"
            },
            {
-              "name": "schema",
-              "outDir": "schemas"
+              "name": "{{api-name}}.schema.ts.boiler",
+              "outDir": "repositories"
            },
            {
-              "name": "repository"
+              "name": "{{api-name}}.repository.ts.boiler",
+              "outDir": "repositories"
            },
            {
-              "name": "service"
+              "name": "{{api-name}}.repository.spec.ts.boiler",
+              "outDir": "repositories"
            },
            {
-              "name": "controller"
+              "name": "{{api-name}}.service.ts.boiler",
+              "outDir": "services"
            },
            {
-              "name": "module"
+              "name": "{{api-name}}.service.spec.ts.boiler",
+              "outDir": "services"
+           },
+           {
+              "name": "{{api-name}}.controller.ts.boiler"
+           },
+           {
+              "name": "{{api-name}}.controller.spec.ts.boiler"
+           },
+           {
+              "name": "{{api-name}}.module.ts.boiler"
            }
         ]
-     }
+     },
+     {
+      "name": "readme",
+      "require": [
+        "name"
+      ],
+      "include": [
+        "README.md.boiler"
+      ]
+    }
   ],
   "output": {
      "file": {
         "replace": [
            {
-              "target": "{{controller-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{interface-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{module-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{repository-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{schema-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{service-name}}",
-              "with": "{{name}}"
-           },
-           {
-              "target": "{{dto-name}}",
-              "with": "{{name}}"
+              "target": "{{api-name}}",
+              "with": "{{api-name}}"
            }
         ]
      }

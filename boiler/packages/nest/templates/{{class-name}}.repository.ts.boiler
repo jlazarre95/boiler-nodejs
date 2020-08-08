@@ -1,0 +1,30 @@
+import { Injectable } from "@nestjs/common";
+
+@Injectable()
+export class {{pascalcase-class-name}}Repository {
+
+    constructor() {
+        
+    }
+
+    async save(/* Declare object here */) {
+        /* Return saved object here */
+    }
+
+    async findById(id: string) {
+        /* Return object here */
+    }
+
+    async find(query: any) {
+       /* Return array of objects here */
+    }
+
+    async update(id: string, /* Declare object here */) {
+        
+    }
+
+    async delete(id: string) {
+        
+    }
+
+}

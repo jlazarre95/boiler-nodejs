@@ -1,0 +1,13 @@
+import { Module } from '@nestjs/common';
+import { {{pascalcase-class-name}}Controller } from 'src/{{class-name}}/{{class-name}}.controller';
+import { {{pascalcase-class-name}}Service } from 'src/{{class-name}}/services/{{class-name}}.service';
+import { {{pascalcase-class-name}}Repository } from 'src/{{class-name}}/repositories/{{class-name}}.repository';
+import { MongooseModule } from '@nestjs/mongoose';
+import { {{pascalcase-class-name}}Schema } from 'src/{{class-name}}/repositories/{{class-name}}.schema';
+
+@Module({
+    imports: [MongooseModule.forFeature([{ name: "{{pascalcase-class-name}}", schema: {{pascalcase-class-name}}Schema }])],
+    controllers: [{{pascalcase-class-name}}Controller],
+    providers: [{{pascalcase-class-name}}Service, {{pascalcase-class-name}}Repository]
+})
+export class {{pascalcase-class-name}}Module {}

@@ -72,7 +72,7 @@ async function modifyNodemon(path, startCommand) {
 async function main() {
     const projectName = boiler.params.name;
 
-    await boiler.removeFolder(projectName);
+    await fs.remove(projectName);
 
     console.log(`Creating new Nest project. This may take a while...`);
     child_process.execSync(`nest new -p npm ${projectName}`);
@@ -94,7 +94,7 @@ async function main() {
     
     console.log("Cleaning project");
     child_process.execSync(`npm uninstall --save-dev jest ts-jest @types/jest @types/supertest`);
-    await boiler.removeFolder("test");
+    await fs.remove("test");
 }
 
 await main();

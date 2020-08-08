@@ -1,0 +1,35 @@
+import { Controller, Post, Body, Delete, HttpCode, HttpStatus, Param, Get, Query, Put } from '@nestjs/common';
+
+@Controller("/api/{{plural-class-name}}")
+export class {{pascalcase-class-name}}Controller {
+
+    constructor() { }
+
+    @Post()
+    async create{{pascalcase-class-name}}(/* Declare object here with @Body() */) {
+    
+    }
+
+    @Get()
+    async getAll{{plural-pascalcase-class-name}}(@Query() query: any) {
+        /* Return array of objects here */
+    }
+
+    @Get(":id")
+    async get{{pascalcase-class-name}}(@Param("id") id: string) {
+        /* Return object here */
+    }
+
+    @Put(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async update{{pascalcase-class-name}}(@Param("id") id: string, /* Declare object here */) {
+
+    }
+
+    @Delete(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async delete{{pascalcase-class-name}}(@Param("id") id: string) {
+        
+    }
+
+}

@@ -1,0 +1,39 @@
+import { Controller, Post, Body, Delete, HttpCode, HttpStatus, Param, Get, Query, Put } from '@nestjs/common';
+import { Create{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/create-{{class-name}}.dto';
+import { {{pascalcase-class-name}}Service } from 'src/{{class-name}}/services/{{class-name}}.service';
+import { I{{pascalcase-class-name}} } from 'src/{{class-name}}/{{class-name}}';
+import { Update{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/update-{{class-name}}.dto';
+
+@Controller("/api/{{plural-class-name}}")
+export class {{pascalcase-class-name}}Controller {
+
+    constructor(private {{camelcase-class-name}}Service: {{pascalcase-class-name}}Service) { }
+
+    @Post()
+    create{{pascalcase-class-name}}(@Body() dto: Create{{pascalcase-class-name}}DTO) {
+        return this.{{camelcase-class-name}}Service.create{{pascalcase-class-name}}(dto);
+    }
+
+    @Get()
+    getAll{{plural-pascalcase-class-name}}(@Query() query: any): Promise<I{{pascalcase-class-name}}[]> {
+        return this.{{camelcase-class-name}}Service.getAll{{plural-pascalcase-class-name}}(query);
+    }
+
+    @Get(":id")
+    get{{pascalcase-class-name}}(@Param("id") id: string): Promise<I{{pascalcase-class-name}}> {
+        return this.{{camelcase-class-name}}Service.get{{pascalcase-class-name}}(id);
+    }
+
+    @Put(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    update{{pascalcase-class-name}}(@Param("id") id: string, @Body() dto: Update{{pascalcase-class-name}}DTO): Promise<void> {
+        return this.{{camelcase-class-name}}Service.update{{pascalcase-class-name}}(id, dto);
+    }
+
+    @Delete(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete{{pascalcase-class-name}}(@Param("id") id: string): Promise<void> {
+        return this.{{camelcase-class-name}}Service.delete{{pascalcase-class-name}}(id);
+    }
+
+}

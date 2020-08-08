@@ -1,0 +1,16 @@
+import { ObjectID } from "bson";
+import { Schema, Document } from "mongoose";
+
+export interface I{{pascalcase-class-name}}Document extends /* Put interface of object here */, Document {
+    _id: string;
+}
+
+export const {{pascalcase-class-name}}Schema = new Schema({
+    _id: { type: String, required: false, default: new ObjectID().toHexString() },
+}, { strict: false });
+
+{{pascalcase-class-name}}Schema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) { delete ret._id }
+});

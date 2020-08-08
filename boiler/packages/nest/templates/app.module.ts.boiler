@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { env } from 'process';
 
 @Module({
-  imports: [MongooseModule.forRoot(env["MONGODB_URI"] || "mongodb://localhost:27017/{{name}}", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })],
+  imports: [MongooseModule.forRoot(env["MONGODB_URI"] || "mongodb://localhost:27017/{{class-name}}", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })],
   controllers: [AppController],
   providers: [AppService],
 })
