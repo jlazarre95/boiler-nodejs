@@ -1,43 +1,45 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { {{pascalcase-class-name}}Repository } from 'src/{{class-name}}/repositories/{{class-name}}.repository';
-import { Create{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/create-{{class-name}}.dto';
-import { I{{pascalcase-class-name}} } from 'src/{{class-name}}/{{class-name}}';
-import { Update{{pascalcase-class-name}}DTO } from 'src/{{class-name}}/dtos/update-{{class-name}}.dto';
+import { CreateEnvironmentDTO } from 'src/environment/dtos/create-environment.dto';
+import { UpdateEnvironmentDTO } from 'src/environment/dtos/update-environment.dto';
+import { Environment } from 'src/environment/environment';
+import { EnvironmentRepository } from 'src/environment/repositories/environment.repository';
+import { Page } from 'src/pagination/pagination';
 
 @Injectable()
-export class {{pascalcase-class-name}}Service {
+export class EnvironmentService {
 
-    constructor(private {{camelcase-class-name}}Repository: {{pascalcase-class-name}}Repository) { }
+    constructor(private environmentRepository: EnvironmentRepository) { }
 
-    create{{pascalcase-class-name}}(dto: Create{{pascalcase-class-name}}DTO): Promise<I{{pascalcase-class-name}}> {
-        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = {
-            _id: dto.id,
+    createEnvironment(dto: CreateEnvironmentDTO): Promise<Environment> {
+        const environment: Environment = {
+            
         };
-        return this.{{camelcase-class-name}}Repository.save({{camelcase-class-name}});
+        return this.environmentRepository.save(environment);
     }
 
-    getAll{{plural-pascalcase-class-name}}(query: any): Promise<I{{pascalcase-class-name}}[]> {
-        return this.{{camelcase-class-name}}Repository.find(query);
+    getAllEnvironments(query: any): Promise<Page<Environment>> {
+        return this.environmentRepository.find(query);
     }
 
-    async get{{pascalcase-class-name}}(id: string): Promise<I{{pascalcase-class-name}}> {
-        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = await this.{{camelcase-class-name}}Repository.findById(id);
-        if(!{{camelcase-class-name}})
+    async getEnvironment(id: string): Promise<Environment> {
+        const environment: Environment = await this.environmentRepository.findById(id);
+        if(!environment)
             throw new NotFoundException();
-        return {{camelcase-class-name}};
+        return environment;
     }
 
-    async update{{pascalcase-class-name}}(id: string, dto: Update{{pascalcase-class-name}}DTO): Promise<void> {
-        const {{camelcase-class-name}}: I{{pascalcase-class-name}} = {
-            _id: id,
+    async updateEnvironment(id: string, dto: UpdateEnvironmentDTO): Promise<Environment> {
+        const environment: Environment = {
+            
         };
-        const res: I{{pascalcase-class-name}} = await this.{{camelcase-class-name}}Repository.update(id, {{camelcase-class-name}});
+        const res: Environment = await this.environmentRepository.update(id, environment);
         if(!res) 
             throw new NotFoundException();
+        return res;
     }
 
-    async delete{{pascalcase-class-name}}(id: string): Promise<void> {
-        await this.{{camelcase-class-name}}Repository.delete(id);
+    deleteEnvironment(id: string): Promise<Environment> {
+        return this.environmentRepository.delete(id);
     }
     
 }

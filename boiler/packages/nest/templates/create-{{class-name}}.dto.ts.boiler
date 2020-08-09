@@ -1,9 +1,3 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
-
 export class Create{{pascalcase-class-name}}DTO {
-    @ApiModelProperty()
-    @IsString()
-    @IsOptional()
-    id: string;
+
 }

@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { {{pascalcase-class-name}}Controller } from 'src/{{class-name}}/{{class-name}}.controller';
-import { {{pascalcase-class-name}}Service } from 'src/{{class-name}}/services/{{class-name}}.service';
-import { {{pascalcase-class-name}}Repository } from 'src/{{class-name}}/repositories/{{class-name}}.repository';
-import { MongooseModule } from '@nestjs/mongoose';
-import { {{pascalcase-class-name}}Schema } from 'src/{{class-name}}/repositories/{{class-name}}.schema';
+import { TypegooseModule } from 'nestjs-typegoose';
+import { EnvironmentController } from 'src/environment/environment.controller';
+import { EnvironmentRepository } from 'src/environment/repositories/environment.repository';
+import { EnvironmentService } from 'src/environment/services/environment.service';
+import { Environment } from './environment';
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: "{{pascalcase-class-name}}", schema: {{pascalcase-class-name}}Schema }])],
-    controllers: [{{pascalcase-class-name}}Controller],
-    providers: [{{pascalcase-class-name}}Service, {{pascalcase-class-name}}Repository]
+    imports: [TypegooseModule.forFeature([Environment])],
+    controllers: [EnvironmentController],
+    providers: [EnvironmentService, EnvironmentRepository]
 })
-export class {{pascalcase-class-name}}Module {}
+export class EnvironmentModule {}

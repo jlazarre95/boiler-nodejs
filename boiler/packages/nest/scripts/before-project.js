@@ -80,21 +80,18 @@ async function main() {
     console.log("Modifying scripts");
     const packagePath = path.join(projectName, "package.json");
     await modifyPackage(packagePath, projectName);
-    
-    // const nodemonPath = path.join(projectName, "nodemon.json");
-    // if(await exists(nodemonPath)) {
-    //     await modifyNodemon(nodemonPath, startCommand); 
-    // }
-
+  
     process.chdir(projectName);
 
     console.log("Installing Node dependencies");
-    child_process.execSync(`npm install --save mongoose class-validator class-transformer @nestjs/mongoose swagger-ui-express @nestjs/swagger dotenv`);
+    child_process.execSync(`npm install --save mongoose class-validator class-transformer typegoose nestjs-typegoose swagger-ui-express @nestjs/swagger dotenv`);
     child_process.execSync(`npm install --silent --save-dev ts-mockito chai @types/chai mocha mocha-typescript @types/mongoose`);
     
     console.log("Cleaning project");
     child_process.execSync(`npm uninstall --save-dev jest ts-jest @types/jest @types/supertest`);
     await fs.remove("test");
+
+    console.log("Done!");
 }
 
 await main();

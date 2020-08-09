@@ -44,6 +44,10 @@
            {
               "name": "app.module.ts.boiler",
               "outDir": "src"
+           },
+           {
+              "name": "pagination.ts.boiler",
+              "outDir": "src/pagination"
            }
         ]
      },
@@ -245,6 +249,17 @@
                "script": "return boiler.string.toPlural(boiler.params['pascalcase-class-name'])"
              }
         ],
+        "replace": [
+            {
+               "target": "environment",
+               "with": "{{api-name}}",
+               "variations": [
+                  "pascalcase",
+                  "camelcase",
+                  "plural"
+               ]
+            }
+         ],
         "outDir": "src/{{api-name}}",
         "include": [
            {
@@ -257,10 +272,6 @@
            },
            {
               "name": "{{api-name}}.ts.boiler"
-           },
-           {
-              "name": "{{api-name}}.schema.ts.boiler",
-              "outDir": "repositories"
            },
            {
               "name": "{{api-name}}.repository.ts.boiler",
