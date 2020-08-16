@@ -84,7 +84,7 @@ async function main() {
     process.chdir(projectName);
 
     console.log("Installing Node dependencies");
-    child_process.execSync(`npm install --save mongoose class-validator class-transformer typegoose nestjs-typegoose swagger-ui-express @nestjs/swagger dotenv`);
+    child_process.execSync(`npm install --save mongoose class-validator class-transformer @typegoose/typegoose nestjs-typegoose swagger-ui-express @nestjs/swagger dotenv`);
     child_process.execSync(`npm install --silent --save-dev ts-mockito chai @types/chai mocha mocha-typescript @types/mongoose`);
     
     console.log("Cleaning project");
